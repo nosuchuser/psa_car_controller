@@ -22,6 +22,8 @@ def get_temp(latitude: str, longitude: str, api_key: str) -> float:
             return temp
     except ConnectionError:
         logger.error("Can't connect to openweathermap :", exc_info=True)
+    except TypeError:
+        logger.error("Structure returned by openweathermap is not according to what was expected (probably bad key) :", exc_info=True)
     except KeyError:
         logger.error("Unable to get temperature from openweathermap :", exc_info=True)
     return None
